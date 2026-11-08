@@ -82,11 +82,6 @@ export function JobCard() {
             <option value="Other" />
           </datalist>
         </form>
-
-        <p className="screen-note">
-          All fields are editable. Use <strong>Print / Save PDF</strong> for a
-          clean A4 copy — blank or completed.
-        </p>
       </main>
     </div>
   );

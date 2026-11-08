@@ -185,21 +185,6 @@ body {
   line-height: 1.2;
 }
 
-.screen-note {
-  max-width: 210mm;
-  margin: 20px auto 0;
-  padding: 0 4px;
-  font-size: 11px;
-  line-height: 1.5;
-  text-align: center;
-  color: #6b7076;
-}
-
-.screen-note strong {
-  color: var(--accent-strong);
-  font-weight: 700;
-}
-
 /* ------------------------------------------------------------------ */
 /* Document header                                                     */
 /* ------------------------------------------------------------------ */
@@ -1728,8 +1713,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     print-color-adjust: exact;
   }
 
-  .app-bar,
-  .screen-note {
+  .app-bar {
     display: none !important;
   }
 
