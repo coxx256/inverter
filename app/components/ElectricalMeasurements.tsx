@@ -14,7 +14,6 @@ export function ElectricalMeasurements() {
                 type="text"
                 name={measurement.name}
                 inputMode="decimal"
-                placeholder="—"
                 autoComplete="off"
               />
               <span className="measure-unit">{measurement.unit}</span>
@@ -27,7 +26,6 @@ export function ElectricalMeasurements() {
             <input
               type="text"
               name="testRemarks"
-              placeholder="Observations from the performance test…"
               autoComplete="off"
             />
           </span>

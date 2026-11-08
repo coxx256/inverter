@@ -20,7 +20,6 @@ export function MaterialsTable() {
               <input
                 type="text"
                 name={`material-${row}-description`}
-                placeholder={row === 1 ? "e.g. 12 V / 100 Ah SMF battery" : ""}
                 autoComplete="off"
               />
             </label>
@@ -38,7 +37,6 @@ export function MaterialsTable() {
               <input
                 type="text"
                 name={`material-${row}-unit`}
-                placeholder={row === 1 ? "pcs" : ""}
                 autoComplete="off"
               />
             </label>

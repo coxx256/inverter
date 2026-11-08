@@ -48,10 +48,9 @@ async function readSignature(file: File): Promise<string> {
 type SignatureBlockProps = {
   role: string;
   name: string;
-  placeholder: string;
 };
 
-function SignatureBlock({ role, name, placeholder }: SignatureBlockProps) {
+function SignatureBlock({ role, name }: SignatureBlockProps) {
   const [signature, setSignature] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const fieldRef = useRef<HTMLDivElement>(null);
@@ -94,7 +93,6 @@ function SignatureBlock({ role, name, placeholder }: SignatureBlockProps) {
         className="sign-name"
         type="text"
         name={name}
-        placeholder={placeholder}
         aria-label={`${role} name`}
         autoComplete="off"
       />
@@ -152,19 +150,13 @@ export function ServiceCompanyFooter() {
           </span>
           <div className="company-name-wrap">
             <span className="company-eyebrow">Service provider</span>
-            <input
-              className="company-name"
-              type="text"
-              name="companyName"
-              defaultValue="S&N Automotive Engineering Ltd"
-              aria-label="Service company name"
-              autoComplete="off"
-            />
+            <span className="company-name">
+              S&amp;N Automotive Engineering Ltd
+            </span>
             <input
               className="company-tagline"
               type="text"
               name="companyTagline"
-              placeholder="UPS & Inverter Sales · Installation · Maintenance · AMC"
               aria-label="Company services"
               autoComplete="off"
             />
@@ -172,42 +164,23 @@ export function ServiceCompanyFooter() {
         </div>
 
         <div className="company-contact">
-          <label className="contact-line">
+          <div className="contact-line">
             <span>Phone</span>
-            <input
-              type="tel"
-              name="companyPhone"
-              defaultValue="+256-779 210 376"
-              autoComplete="off"
-            />
-          </label>
-          <label className="contact-line">
+            <span className="contact-value">+256-779 210 376</span>
+          </div>
+          <div className="contact-line">
             <span>Email</span>
-            <input
-              type="email"
-              name="companyEmail"
-              defaultValue="snauto.ltd@gmail.com"
-              autoComplete="off"
-            />
-          </label>
+            <span className="contact-value">snauto.ltd@gmail.com</span>
+          </div>
         </div>
       </div>
 
       <div className="sign-grid">
-        <SignatureBlock
-          role="Serviced by"
-          name="servicedByName"
-          placeholder="Name / designation"
-        />
-        <SignatureBlock
-          role="Confirmed by"
-          name="confirmedByName"
-          placeholder="Name / designation"
-        />
+        <SignatureBlock role="Serviced by" name="servicedByName" />
+        <SignatureBlock role="Confirmed by" name="confirmedByName" />
         <SignatureBlock
           role="Customer acknowledgement"
           name="customerName"
-          placeholder="Customer name"
         />
       </div>
 

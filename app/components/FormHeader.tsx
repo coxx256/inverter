@@ -13,7 +13,6 @@ export function FormHeader() {
           <input
             type="text"
             name="jobCardNo"
-            placeholder="JC-0000"
             autoComplete="off"
             spellCheck={false}
           />

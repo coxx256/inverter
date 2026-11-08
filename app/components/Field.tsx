@@ -1,7 +1,6 @@
 export type FieldProps = {
   label: string;
   name: string;
-  placeholder?: string;
   type?: string;
   list?: string;
   className?: string;
@@ -11,7 +10,6 @@ export type FieldProps = {
 export function Field({
   label,
   name,
-  placeholder,
   type = "text",
   list,
   className = "",
@@ -23,7 +21,6 @@ export function Field({
       <input
         type={type}
         name={name}
-        placeholder={placeholder}
         list={list}
         inputMode={inputMode}
         autoComplete="off"
