@@ -1,0 +1,25 @@
+import type { MetadataRoute } from "next";
+
+const manifest = (): MetadataRoute.Manifest => ({
+  name: "Inverter Service Job Card",
+  short_name: "Job Card",
+  description: "UPS and inverter service job card application",
+  start_url: "/",
+  display: "standalone",
+  background_color: "#ffffff",
+  theme_color: "#000000",
+  icons: [
+    {
+      src: "/icon-192.png",
+      sizes: "192x192",
+      type: "image/png",
+    },
+    {
+      src: "/icon-512.png",
+      sizes: "512x512",
+      type: "image/png",
+    },
+  ],
+});
+
+export default manifest;
