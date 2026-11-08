@@ -638,6 +638,154 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 /* ------------------------------------------------------------------ */
+/* Inverter standby recording                                          */
+/* ------------------------------------------------------------------ */
+
+.standby {
+  margin-top: 8px;
+  border: 1px solid #000000;
+  background: #ffffff;
+}
+
+.standby-title {
+  margin: 0;
+  padding: 4px 8px;
+  border-bottom: 1px solid #000000;
+  background: #ffffff;
+  color: #000000;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 8.5px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.standby-table {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  background: #000000;
+}
+
+.standby-cell {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 5px 7px;
+  background: #ffffff;
+}
+
+.standby-cell-wide {
+  grid-column: 1 / -1;
+}
+
+.standby-label {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 6.8px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+  color: #000000;
+}
+
+.standby-control {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.standby-input {
+  width: 100%;
+  min-width: 0;
+  height: 20px;
+  padding: 1px 5px;
+  border: 1px solid #000000;
+  border-radius: 0;
+  background: #ffffff;
+  color: #000000;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  line-height: 1.2;
+  outline: none;
+}
+
+.standby-input:focus {
+  box-shadow: inset 0 0 0 1px #000000;
+}
+
+.standby-input::placeholder {
+  color: #a6aaae;
+}
+
+.standby-unit {
+  flex: none;
+  color: #000000;
+  font-size: 8px;
+  line-height: 1.2;
+}
+
+.standby-checks {
+  min-height: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.standby-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  line-height: 1.2;
+  color: #000000;
+  cursor: pointer;
+  user-select: none;
+}
+
+.standby-check input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.standby-box {
+  position: relative;
+  width: 13px;
+  height: 13px;
+  flex: none;
+  border: 1px solid #000000;
+  background: #ffffff;
+}
+
+.standby-check input:checked + .standby-box {
+  background: #000000;
+}
+
+.standby-check input:checked + .standby-box::after {
+  content: "";
+  position: absolute;
+  left: 3.5px;
+  top: 1px;
+  width: 3.5px;
+  height: 7px;
+  border: solid #ffffff;
+  border-width: 0 1.5px 1.5px 0;
+  transform: rotate(42deg);
+}
+
+.standby-check input:focus-visible + .standby-box {
+  outline: 2px solid #000000;
+  outline-offset: 2px;
+}
+
+/* ------------------------------------------------------------------ */
 /* Text areas                                                          */
 /* ------------------------------------------------------------------ */
 
@@ -982,10 +1130,87 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   border-bottom-color: var(--ink);
 }
 
-.sign-space {
-  height: 28px;
-  border-bottom: 1px solid #8a8e93;
+.signature-field {
+  position: relative;
   margin-top: 5px;
+}
+
+.sign-space {
+  position: relative;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px;
+  border: 1px dashed #a9aeb3;
+  background: #fcfcfc;
+  overflow: hidden;
+  cursor: pointer;
+  transition:
+    border-color 140ms ease,
+    background-color 140ms ease;
+}
+
+.sign-space:hover,
+.sign-space:focus-within {
+  border-color: #4c5055;
+  background: #f7f7f7;
+}
+
+.signature-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.signature-placeholder {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  color: #7a7f84;
+  font-size: 6.8px;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: 0.05em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.signature-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+.signature-remove {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  z-index: 1;
+  width: 17px;
+  height: 17px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid #b9bdc1;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #5d6268;
+  font-family: inherit;
+  font-size: 11px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.signature-remove:hover {
+  border-color: #111111;
+  color: #111111;
 }
 
 .sign-caption {
@@ -1206,6 +1431,55 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     grid-column: 1 / -1;
   }
 
+  .standby {
+    margin-top: 11px;
+  }
+
+  .standby-table {
+    grid-template-columns: 1fr;
+  }
+
+  .standby-cell {
+    gap: 4px;
+    padding: 7px 8px;
+  }
+
+  .standby-cell-wide {
+    grid-column: auto;
+  }
+
+  .standby-label {
+    font-size: 7px;
+  }
+
+  .standby-input {
+    height: 30px;
+    padding: 2px 7px;
+    font-size: 16px;
+  }
+
+  .standby-checks {
+    min-height: 30px;
+    gap: 22px;
+  }
+
+  .standby-check {
+    font-size: 12px;
+    gap: 7px;
+  }
+
+  .standby-box {
+    width: 16px;
+    height: 16px;
+  }
+
+  .standby-check input:checked + .standby-box::after {
+    left: 4.5px;
+    top: 1px;
+    width: 5px;
+    height: 9px;
+  }
+
   .ruled {
     /* 16px prevents iOS auto-zoom while typing */
     font-size: 16px;
@@ -1342,7 +1616,17 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   }
 
   .sign-space {
-    height: 32px;
+    height: 72px;
+  }
+
+  .signature-placeholder {
+    font-size: 8px;
+  }
+
+  .signature-remove {
+    width: 20px;
+    height: 20px;
+    font-size: 13px;
   }
 
   .footer-note {
@@ -1437,6 +1721,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   .doc-footer,
   .checklist,
   .measure-grid,
+  .standby,
   .materials-table,
   .company-band {
     break-inside: avoid;
@@ -1482,7 +1767,22 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     resize: none;
   }
 
+  .signature-input,
+  .signature-placeholder,
+  .signature-remove {
+    display: none !important;
+  }
+
   .sign-space {
-    height: 30px;
+    height: 34px;
+    padding: 0;
+    border: 0;
+    border-bottom: 1px solid #8a8e93;
+    background: #ffffff !important;
+    cursor: default;
+  }
+
+  .signature-image {
+    height: 100%;
   }
 }

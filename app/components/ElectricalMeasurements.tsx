@@ -1,4 +1,5 @@
 import { MEASUREMENTS } from "./data";
+import { InverterStandbyRecording } from "./InverterStandbyRecording";
 
 export function ElectricalMeasurements() {
   return (
@@ -32,6 +33,7 @@ export function ElectricalMeasurements() {
           </span>
         </label>
       </div>
+      <InverterStandbyRecording />
     </section>
   );
 }

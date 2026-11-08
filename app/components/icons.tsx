@@ -36,3 +36,22 @@ export function ResetIcon() {
     </svg>
   );
 }
+
+export function CameraIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      width="12"
+      height="12"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M3 7h3l2-3h8l2 3h3a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1z" />
+      <circle cx="12" cy="13" r="4" />
+    </svg>
+  );
+}
