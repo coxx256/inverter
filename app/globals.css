@@ -1230,6 +1230,207 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   color: var(--accent-strong);
 }
 
+/* Signature scan / crop dialog */
+
+.crop-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  background: rgba(17, 17, 17, 0.62);
+  backdrop-filter: blur(3px);
+}
+
+.crop-panel {
+  width: min(520px, 100%);
+  max-height: calc(100vh - 36px);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  overflow: auto;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.4);
+}
+
+.crop-head {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.crop-title {
+  margin: 0;
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: 0.01em;
+}
+
+.crop-hint {
+  margin: 0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.crop-viewport {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-height: 52vh;
+  padding: 10px;
+  overflow: hidden;
+  border: 1px solid #d3d6da;
+  border-radius: 4px;
+  background: #17181a;
+}
+
+.crop-canvas {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+  max-height: 50vh;
+  line-height: 0;
+  touch-action: none;
+  user-select: none;
+}
+
+.crop-image {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 50vh;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+
+.crop-box {
+  position: absolute;
+  border: 1.5px solid #ffffff;
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.55);
+  cursor: move;
+  touch-action: none;
+}
+
+.crop-box::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(
+      to right,
+      transparent calc(33.333% - 0.5px),
+      rgba(255, 255, 255, 0.35) 33.333%,
+      transparent calc(33.333% + 0.5px)
+    ),
+    linear-gradient(
+      to right,
+      transparent calc(66.666% - 0.5px),
+      rgba(255, 255, 255, 0.35) 66.666%,
+      transparent calc(66.666% + 0.5px)
+    ),
+    linear-gradient(
+      to bottom,
+      transparent calc(33.333% - 0.5px),
+      rgba(255, 255, 255, 0.35) 33.333%,
+      transparent calc(33.333% + 0.5px)
+    ),
+    linear-gradient(
+      to bottom,
+      transparent calc(66.666% - 0.5px),
+      rgba(255, 255, 255, 0.35) 66.666%,
+      transparent calc(66.666% + 0.5px)
+    );
+}
+
+.crop-handle {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  background: #ffffff;
+  touch-action: none;
+}
+
+.crop-handle-nw {
+  top: -7px;
+  left: -7px;
+  cursor: nwse-resize;
+}
+
+.crop-handle-ne {
+  top: -7px;
+  right: -7px;
+  cursor: nesw-resize;
+}
+
+.crop-handle-sw {
+  bottom: -7px;
+  left: -7px;
+  cursor: nesw-resize;
+}
+
+.crop-handle-se {
+  right: -7px;
+  bottom: -7px;
+  cursor: nwse-resize;
+}
+
+.crop-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.crop-button {
+  padding: 8px 14px;
+  border: 1px solid #d3d6da;
+  border-radius: 4px;
+  background: #ffffff;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+}
+
+.crop-button:hover:not(:disabled) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.crop-button-primary {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #111111;
+}
+
+.crop-button-primary:hover:not(:disabled) {
+  border-color: var(--accent-hover);
+  background: var(--accent-hover);
+  color: #ffffff;
+}
+
+.crop-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.crop-button:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
 .sign-caption {
   display: flex;
   justify-content: space-between;
@@ -1648,6 +1849,29 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     font-size: 13px;
   }
 
+  .crop-backdrop {
+    padding: 10px;
+  }
+
+  .crop-panel {
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .crop-viewport {
+    max-height: 46vh;
+    padding: 8px;
+  }
+
+  .crop-canvas,
+  .crop-image {
+    max-height: 44vh;
+  }
+
+  .crop-button {
+    font-size: 13px;
+  }
+
   .footer-note {
     flex-direction: column;
     gap: 3px;
@@ -1787,7 +2011,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
   .signature-input,
   .signature-placeholder,
-  .signature-remove {
+  .signature-remove,
+  .crop-backdrop {
     display: none !important;
   }
 
