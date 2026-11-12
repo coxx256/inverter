@@ -1279,6 +1279,22 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   line-height: 1.5;
 }
 
+.crop-error {
+  margin: 0;
+  color: #b42318;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.signature-error {
+  margin: 3px 0 0;
+  color: #b42318;
+  font-size: 7px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
 .crop-viewport {
   display: flex;
   align-items: center;
@@ -2012,6 +2028,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   .signature-input,
   .signature-placeholder,
   .signature-remove,
+  .signature-error,
   .crop-backdrop {
     display: none !important;
   }

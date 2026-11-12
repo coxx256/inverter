@@ -293,6 +293,7 @@ function SignatureCropper({
   const [crop, setCrop] = useState<CropRect | null>(null);
   const [loaded, setLoaded] = useState(false);
   const [working, setWorking] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const handleKey = (event: KeyboardEvent) => {
@@ -381,10 +382,25 @@ function SignatureCropper({
   }
 
   function handleImageLoad(event: SyntheticEvent<HTMLImageElement>) {
+    // Read the element synchronously: React clears `currentTarget` once the
+    // event handler returns, and the state updater below runs later.
+    const image = event.currentTarget;
+
+    let detected: CropRect | null = null;
+    try {
+      detected = detectInkBox(image);
+    } catch {
+      detected = null;
+    }
+
+    setError(null);
     setLoaded(true);
-    setCrop(
-      (current) =>
-        current ?? detectInkBox(event.currentTarget) ?? DEFAULT_CROP,
+    setCrop((current) => current ?? detected ?? DEFAULT_CROP);
+  }
+
+  function handleImageError() {
+    setError(
+      "That photo could not be loaded. Cancel and try taking another one.",
     );
   }
 
@@ -403,6 +419,7 @@ function SignatureCropper({
     try {
       onConfirm(await cropSignature(src, crop));
     } catch {
+      setError("The signature could not be cropped. Please try again.");
       setWorking(false);
     }
   }
@@ -435,6 +452,11 @@ function SignatureCropper({
             Drag over the photo to frame the signature, then fine-tune the
             corners. Only the highlighted area is kept.
           </p>
+          {error ? (
+            <p className="crop-error" role="alert">
+              {error}
+            </p>
+          ) : null}
         </div>
 
         <div className="crop-viewport">
@@ -450,6 +472,7 @@ function SignatureCropper({
               alt=""
               draggable={false}
               onLoad={handleImageLoad}
+              onError={handleImageError}
             />
             {crop ? (
               <div
@@ -508,6 +531,7 @@ function SignatureBlock({ role, name }: SignatureBlockProps) {
   const [signature, setSignature] = useState<string | null>(null);
   const [draft, setDraft] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const fieldRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -519,6 +543,7 @@ function SignatureBlock({ role, name }: SignatureBlockProps) {
     const handleReset = () => {
       setSignature(null);
       setDraft(null);
+      setError(null);
     };
     form.addEventListener("reset", handleReset);
 
@@ -540,11 +565,13 @@ function SignatureBlock({ role, name }: SignatureBlockProps) {
     }
 
     setBusy(true);
+    setError(null);
 
     try {
       setDraft(await preparePhoto(file));
     } catch {
       setDraft(null);
+      setError("That photo could not be opened. Please try again.");
     } finally {
       setBusy(false);
     }
@@ -603,6 +630,11 @@ function SignatureBlock({ role, name }: SignatureBlockProps) {
             onCancel={closeCropper}
             onConfirm={applyCrop}
           />
+        ) : null}
+        {error ? (
+          <p className="signature-error" role="alert">
+            {error}
+          </p>
         ) : null}
       </div>
       <div className="sign-caption">
